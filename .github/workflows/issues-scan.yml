@@ -21,6 +21,8 @@ on:
     pull_request_target:
         branches:
             - alpine-base
+            - pr-test
+            - main
 
 # #
 #   environment variables
