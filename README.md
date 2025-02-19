@@ -6,7 +6,7 @@ Test 2
 
 </div>
 
-2
+3
 
 <div align="center">
 <h6>New dark theme, support for Docker, Traefik, and OpenVPN servers. Includes a "bad actor" blocklist, and numerous scripts.</h6>
