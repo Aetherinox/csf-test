@@ -841,8 +841,9 @@ jobs:
                       ## ${{ github.event.pull_request.title }} (${{ github.event.pull_request.number }})
 
                       - PR URL: ${{ github.event.pull_request.html_url }}
-                      - Repo: https://github.com/${{ github.repository }}:${{ github.head_ref }}
-                      - Author: https://${{ github.event.pull_request.user.login }} (${{ github.event.pull_request.author_association }})
+                      - Repo: https://github.com/${{ github.repository }}
+                      - Branch: ${{ github.head_ref }}
+                      - Author: https://github.com/${{ github.event.pull_request.user.login }} (${{ github.event.pull_request.author_association }})
                       - Status: `${{ github.event.pull_request.state }}`
 
                       ### Scan Results
@@ -886,11 +887,12 @@ jobs:
                       - Triggered By: `${{ github.actor }}`
                       - Status: `${{ job.status == 'success' && '✅ Successful' || '❌ Failed' }}`
 
-                      ### ${{ github.event.pull_request.title }} (${{ github.event.pull_request.number }})
+                      ## ${{ github.event.pull_request.title }} (${{ github.event.pull_request.number }})
 
                       - PR URL: ${{ github.event.pull_request.html_url }}
-                      - Repo: ${{ github.repository }}:${{ github.head_ref }}
-                      - Author: `${{ github.event.pull_request.user.login }}` (${{ github.event.pull_request.author_association }})
+                      - Repo: https://github.com/${{ github.repository }}
+                      - Branch: ${{ github.head_ref }}
+                      - Author: https://github.com/${{ github.event.pull_request.user.login }} (${{ github.event.pull_request.author_association }})
                       - Status: `${{ github.event.pull_request.state }}`
 
                       ### Scan Results
