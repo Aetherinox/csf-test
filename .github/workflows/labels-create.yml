@@ -168,10 +168,10 @@ jobs:
               with:
                   github-token: ${{ secrets.ADMINSERV_TOKEN_CL }}
                   script: |
+                      let count = 0 ;
                       const labels = JSON.parse( process.env.LABELS_JSON );
                       for ( const label of labels )
                       {
-                          let count = 0 ;
                           try
                           {
                               await github.rest.issues.createLabel(
