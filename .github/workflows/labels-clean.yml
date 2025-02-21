@@ -241,9 +241,9 @@ jobs:
                       ## 🎫 Labels › Clean ${{ job.status == 'success' && '✅' || '❌' }}
 
                       A **successful** workflow has been ran to wipe all labels from your repository.
-                      ${{ steps.task_label_verify_existing.outputs.result }} labels have been removed.
+                      ${{ steps.task_label_remove_run.outputs.count }} labels have been removed.
 
-                      - Labels: `${{ steps.task_label_verify_existing.outputs.result }} created`
+                      - Labels: `${{ steps.task_label_remove_run.outputs.count }} created`
                       - Workflow: `${{ github.workflow }} (#${{github.run_number}})`
                       - Runner: `${{ runner.name }}`
                       - Triggered By: `${{ github.actor }}`
@@ -277,7 +277,7 @@ jobs:
 
                       A **failed** attempt was made to run this workflow. No new labels have been added to your repository.
 
-                      - Labels: `${{ steps.task_label_verify_existing.outputs.result }} created`
+                      - Labels: `${{ steps.task_label_remove_run.outputs.count }} created`
                       - Workflow: `${{ github.workflow }} (#${{github.run_number}})`
                       - Runner: `${{ runner.name }}`
                       - Triggered By: `${{ github.actor }}`
