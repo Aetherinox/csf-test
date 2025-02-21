@@ -840,9 +840,10 @@ jobs:
 
                       ## ${{ github.event.pull_request.title }} (${{ github.event.pull_request.number }})
 
-                      - PR URL: ${{ github.event.pull_request.html_url }}
+                      - Pull Request: ${{ github.event.pull_request.html_url }}
+                      - Author: https://github.com/${{ github.event.pull_request.user.login }} (${{ github.event.pull_request.author_association }})
                       - Repo: https://github.com/${{ github.repository }}
-                      - Branch: ${{ github.head_ref }}
+                      - Branch: `${{ github.head_ref }}`
                       - Author: https://github.com/${{ github.event.pull_request.user.login }} (${{ github.event.pull_request.author_association }})
                       - Status: `${{ github.event.pull_request.state }}`
 
@@ -889,9 +890,10 @@ jobs:
 
                       ## ${{ github.event.pull_request.title }} (${{ github.event.pull_request.number }})
 
-                      - PR URL: ${{ github.event.pull_request.html_url }}
+                      - Pull Request: ${{ github.event.pull_request.html_url }}
+                      - Author: https://github.com/${{ github.event.pull_request.user.login }} (${{ github.event.pull_request.author_association }})
                       - Repo: https://github.com/${{ github.repository }}
-                      - Branch: ${{ github.head_ref }}
+                      - Branch: `${{ github.head_ref }}`
                       - Author: https://github.com/${{ github.event.pull_request.user.login }} (${{ github.event.pull_request.author_association }})
                       - Status: `${{ github.event.pull_request.state }}`
 
