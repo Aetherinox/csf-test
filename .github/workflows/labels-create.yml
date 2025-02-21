@@ -196,7 +196,7 @@ jobs:
                           }
                       }
 
-                      console.log(count);
+                      console.log("[Success]: Added" + count + " labels to repo");
 
                       return count
 
@@ -233,7 +233,7 @@ jobs:
 
                       A **successful** workflow has been ran to generate labels for your repository.
 
-                      - Labels Created: `${{ steps.task_label_verify_existing.outputs.result }}`
+                      - Labels: `${{ steps.task_label_verify_existing.outputs.result }} created`
                       - Workflow: `${{ github.workflow }} (#${{github.run_number}})`
                       - Runner: `${{ runner.name }}`
                       - Triggered By: `${{ github.actor }}`
@@ -267,7 +267,7 @@ jobs:
 
                       A **failed** attempt was made to run this workflow. No new labels have been added to your repository.
 
-                      - Labels Created: `${{ steps.task_label_verify_existing.outputs.result }}`
+                      - Labels: `${{ steps.task_label_verify_existing.outputs.result }} created`
                       - Workflow: `${{ github.workflow }} (#${{github.run_number}})`
                       - Runner: `${{ runner.name }}`
                       - Triggered By: `${{ github.actor }}`
