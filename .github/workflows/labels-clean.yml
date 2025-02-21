@@ -187,7 +187,7 @@ jobs:
                       });
 
                       // const labels = JSON.parse( process.env.LABELS_JSON );
-                      let count = Object.keys(labels).length;
+                      let result = Object.keys(labels).length;
                       for ( const label of labels )
                       {
                           try
@@ -205,9 +205,9 @@ jobs:
                           }
                       }
 
-                      console.log("[Success]: Added " + count + " labels to repo");
+                      console.log("[Success]: Added " + result + " labels to repo");
 
-                      return count
+                      return result
 
             # #
             #   Labels › Get Weekly Commits
@@ -241,9 +241,9 @@ jobs:
                       ## 🎫 Labels › Clean ${{ job.status == 'success' && '✅' || '❌' }}
 
                       A **successful** workflow has been ran to wipe all labels from your repository.
-                      ${{ steps.task_label_remove_run.outputs.count }} labels have been removed.
+                      ${{ steps.task_label_remove_run.outputs.result }} labels have been removed.
 
-                      - Labels: `${{ steps.task_label_remove_run.outputs.count }} created`
+                      - Labels: `${{ steps.task_label_remove_run.outputs.result }} created`
                       - Workflow: `${{ github.workflow }} (#${{github.run_number}})`
                       - Runner: `${{ runner.name }}`
                       - Triggered By: `${{ github.actor }}`
@@ -277,7 +277,7 @@ jobs:
 
                       A **failed** attempt was made to run this workflow. No new labels have been added to your repository.
 
-                      - Labels: `${{ steps.task_label_remove_run.outputs.count }} created`
+                      - Labels: `${{ steps.task_label_remove_run.outputs.result }} created`
                       - Workflow: `${{ github.workflow }} (#${{github.run_number}})`
                       - Runner: `${{ runner.name }}`
                       - Triggered By: `${{ github.actor }}`
