@@ -205,7 +205,7 @@ jobs:
                           }
                       }
 
-                      console.log("[Success]: Added" + count + " labels to repo");
+                      console.log("[Success]: Added " + count + " labels to repo");
 
                       return count
 
