@@ -34,9 +34,7 @@ on:
 # #
 
 env:
-    BOT_NAME_1:           AdminServ
-    BOT_NAME_2:           AdminServX
-    BOT_NAME_3:           EuropaServ
+    BOT_NAME_1:           EuropaServ
     BOT_NAME_DEPENDABOT:  dependabot[bot]
     LABELS_JSON: |
       [
@@ -224,14 +222,15 @@ jobs:
               with:
                   username: 'Io'
                   avatar-url: 'https://i.imgur.com/8BVDkla.jpg'
-                  webhook-url: ${{ secrets.DISCORD_WEBHOOK_CHAN_DOCKER_BASE_ALPINE_WORKFLOWS }}
+                  webhook-url: ${{ secrets.DISCORD_WEBHOOK_CHAN_TVAPP2_WORKFLOWS }}
                   embed-title: "⚙️ ${{ github.workflow_ref }}"
                   embed-url: "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
                   embed-thumbnail-url: 'https://i.imgur.com/zDIzE8T.jpg'
                   embed-description: |
-                      ## 📦 Labels › Create ${{ job.status == 'success' && '✅' || '❌' }}
+                      ## 🎫 Labels › Create ${{ job.status == 'success' && '✅' || '❌' }}
 
                       A **successful** workflow has been ran to generate labels for your repository.
+                      ${{ steps.task_label_verify_existing.outputs.result }} labels have been added.
 
                       - Labels: `${{ steps.task_label_verify_existing.outputs.result }} created`
                       - Workflow: `${{ github.workflow }} (#${{github.run_number}})`
@@ -258,12 +257,12 @@ jobs:
               with:
                   username: 'Io'
                   avatar-url: 'https://i.imgur.com/8BVDkla.jpg'
-                  webhook-url: ${{ secrets.DISCORD_WEBHOOK_CHAN_DOCKER_BASE_ALPINE_WORKFLOWS }}
+                  webhook-url: ${{ secrets.DISCORD_WEBHOOK_CHAN_TVAPP2_WORKFLOWS }}
                   embed-title: "⚙️ ${{ github.workflow_ref }}"
                   embed-url: "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
                   embed-thumbnail-url: 'https://i.imgur.com/zDIzE8T.jpg'
                   embed-description: |
-                      ## 📦 Labels › Create ${{ job.status == 'success' && '✅' || '❌' }}
+                      ## 🎫 Labels › Create ${{ job.status == 'success' && '✅' || '❌' }}
 
                       A **failed** attempt was made to run this workflow. No new labels have been added to your repository.
 
