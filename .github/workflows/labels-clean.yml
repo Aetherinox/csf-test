@@ -241,6 +241,7 @@ jobs:
                       ## 🎫 Labels › Clean ${{ job.status == 'success' && '✅' || '❌' }}
 
                       A **successful** workflow has been ran to wipe all labels from your repository.
+                      
                       ${{ steps.task_label_remove_run.outputs.result }} labels have been removed.
 
                       - Labels: `${{ steps.task_label_remove_run.outputs.result }} created`

@@ -230,6 +230,7 @@ jobs:
                       ## 🎫 Labels › Create ${{ job.status == 'success' && '✅' || '❌' }}
 
                       A **successful** workflow has been ran to generate labels for your repository.
+
                       ${{ steps.task_label_verify_existing.outputs.result }} labels have been added.
 
                       - Labels: `${{ steps.task_label_verify_existing.outputs.result }} created`
