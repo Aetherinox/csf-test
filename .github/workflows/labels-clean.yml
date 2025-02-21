@@ -29,6 +29,15 @@ env:
     BOT_NAME_DEPENDABOT:  dependabot[bot]
     LABELS_JSON: |
       [
+          { "name": "bug",                          "color": "8F1784", "description": "Default github label" },
+          { "name": "documentation",                "color": "8F1784", "description": "Default github label" },
+          { "name": "duplicate",                    "color": "8F1784", "description": "Default github label" },
+          { "name": "enhancement",                  "color": "8F1784", "description": "Default github label" },
+          { "name": "good first issue",             "color": "8F1784", "description": "Default github label" },
+          { "name": "help wanted",                  "color": "8F1784", "description": "Default github label" },
+          { "name": "invalid",                      "color": "8F1784", "description": "Default github label" },
+          { "name": "question",                     "color": "8F1784", "description": "Default github label" },
+          { "name": "wontfix",                      "color": "8F1784", "description": "Default github label" },
           { "name": "AC › Changes Made",           "color": "8F1784", "description": "Requested changes have been made and are pending a re-scan" },
           { "name": "AC › Changes Required",       "color": "8F1784", "description": "Requires changes to be made to the package before being accepted" },
           { "name": "AC › Failed",                 "color": "a61f2d", "description": "Autocheck failed to run through a complete cycle, requires investigation" },
