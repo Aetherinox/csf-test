@@ -227,11 +227,11 @@ jobs:
                   embed-url: "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
                   embed-thumbnail-url: 'https://i.imgur.com/zDIzE8T.jpg'
                   embed-description: |
-                      ## 🎫 Labels › Create ${{ job.status == 'success' && '✅' || '❌' }}
+                      ## 🎫  Labels › Create  ${{ job.status == 'success' && '✅' || '❌' }}
 
                       A **successful** workflow has been ran to generate labels for your repository.
 
-                      ${{ steps.task_label_verify_existing.outputs.result }} labels have been added.
+                      **${{ steps.task_label_verify_existing.outputs.result }}** labels have been added.
 
                       - Labels: `${{ steps.task_label_verify_existing.outputs.result }} created`
                       - Workflow: `${{ github.workflow }} (#${{github.run_number}})`
@@ -263,7 +263,7 @@ jobs:
                   embed-url: "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
                   embed-thumbnail-url: 'https://i.imgur.com/zDIzE8T.jpg'
                   embed-description: |
-                      ## 🎫 Labels › Create ${{ job.status == 'success' && '✅' || '❌' }}
+                      ## 🎫  Labels › Create  ${{ job.status == 'success' && '✅' || '❌' }}
 
                       A **failed** attempt was made to run this workflow. No new labels have been added to your repository.
 

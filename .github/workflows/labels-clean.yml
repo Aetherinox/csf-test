@@ -238,11 +238,11 @@ jobs:
                   embed-url: "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
                   embed-thumbnail-url: 'https://i.imgur.com/zDIzE8T.jpg'
                   embed-description: |
-                      ## 🎫 Labels › Clean ${{ job.status == 'success' && '✅' || '❌' }}
+                      ## 🎫  Labels › Clean  ${{ job.status == 'success' && '✅' || '❌' }}
 
                       A **successful** workflow has been ran to wipe all labels from your repository.
                       
-                      ${{ steps.task_label_remove_run.outputs.result }} labels have been removed.
+                      **${{ steps.task_label_remove_run.outputs.result }}** labels have been removed.
 
                       - Labels: `${{ steps.task_label_remove_run.outputs.result }} created`
                       - Workflow: `${{ github.workflow }} (#${{github.run_number}})`
@@ -274,7 +274,7 @@ jobs:
                   embed-url: "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
                   embed-thumbnail-url: 'https://i.imgur.com/zDIzE8T.jpg'
                   embed-description: |
-                      ## 🎫 Labels › Clean ${{ job.status == 'success' && '✅' || '❌' }}
+                      ## 🎫  Labels › Clean  ${{ job.status == 'success' && '✅' || '❌' }}
 
                       A **failed** attempt was made to run this workflow. No new labels have been added to your repository.
 
