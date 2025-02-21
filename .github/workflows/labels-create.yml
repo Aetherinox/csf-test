@@ -168,8 +168,8 @@ jobs:
               with:
                   github-token: ${{ secrets.ADMINSERV_TOKEN_CL }}
                   script: |
-                      let count = 0 ;
                       const labels = JSON.parse( process.env.LABELS_JSON );
+                      let count = Object.keys(labels).length;
                       for ( const label of labels )
                       {
                           try
@@ -182,7 +182,6 @@ jobs:
                                   description:  label.description || '',
                                   color:        label.color
                               });
-                              count += i;
                           }
                           catch ( err )
                           {
