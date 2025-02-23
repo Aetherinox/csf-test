@@ -8,10 +8,12 @@ body:
   - type: markdown
     attributes:
       value: |
-        1. Please speak `English`.
-        2. Make sure you are using the latest version and take a moment to check that your issue hasn't been reported before.
-        3. It's really important to provide pertinent details and logs,
-           incomplete details will be handled as an invalid report.
+        1. This issue type is different from feature requests.
+        2. This issue type is typically used by the developers of this repository to create and track new features
+           that have been planned in a future version of TVApp2.
+        3. Only use this issue type if you have been instructed to do so by a repository contributor.
+        4. Describe the benefits of this plan, and what needs to be taken into consideration during implementation.
+        5. Be detailed but to the point.
 
         <br />
 
