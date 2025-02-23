@@ -1,6 +1,6 @@
-name: '🗺️ Roadmap'
+name: "🗺️ Roadmap"
 description: Planned projects in the future to do. (⚠️ For contributors only)
-title: '🗺️ Roadmap: <title>'
+title: "🗺️ Roadmap: <title>"
 labels: [
   "Type ◦ Roadmap"
 ]
