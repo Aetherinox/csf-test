@@ -1,0 +1,179 @@
+# #
+#   @parent         github workflow
+#   @desc           resets daily limits imposed by workflow.
+#                       to be ran at midnight UTC daily.
+#   @author         Aetherinox
+#   @url            https://github.com/Aetherinox
+# #
+
+run-name: "🌑 Cloudflare Worker Nightly Reset"
+name: "☁️ Worker › Daily Reset"
+
+# #
+#   triggers
+# #
+
+on:
+    schedule:
+      # Reset nightly at midnight UTC, same time Cloudflare resets daily limits
+      - cron: '0 0 * * *'
+    workflow_dispatch:
+
+# #
+#   environment variables
+# #
+
+env:
+    BOT_NAME_1:           AdminServ
+    BOT_NAME_2:           AdminServX
+    BOT_NAME_3:           EuropaServ
+    BOT_NAME_DEPENDABOT:  dependabot[bot]
+
+# #
+#   jobs
+# #
+
+jobs:
+
+    # #
+    #   [ Job ] - Daily Reset
+    # #
+
+    job-dailyreset:
+        name: >-
+          🌑 Nightly Reset
+        runs-on: ubuntu-latest
+        outputs:
+            package_version: ${{ steps.task_dailyreset_package_getversion.outputs.PACKAGE_VERSION }}
+        permissions:
+            contents: write
+            packages: write
+        environment:
+            name: Orion
+        steps:
+
+            # #
+            #   [ Daily Reset ] Start
+            # #
+
+            - name: "✅ Start"
+              id: task_dailyreset_start
+              run: |
+                  echo "Starting nightly reset"
+
+            # #
+            #   [ Daily Reset ] Checkout
+            # #
+
+            - name: "☑️ Checkout"
+              id: task_dailyreset_checkout
+              uses: actions/checkout@v4
+              with:
+                  fetch-depth: 0
+
+            # #
+            #   [ Daily Reset ] Get package.json VERSION value
+            # #
+
+            - name: "👁️‍🗨️ Package Version › Set"
+              id: task_dailyreset_package_getversion
+              run: |
+                  VER=$(cat src/package.json | jq -r '.version')
+                  echo "PACKAGE_VERSION=$VER" >> $GITHUB_OUTPUT
+
+            # #
+            #   [ Daily Reset ] Show latest version being released from package.json
+            # #
+
+            - name: "👁️‍🗨️ Package Version › Get"
+              id: task_dailyreset_package_getversion_debug
+              run: |
+                  echo "VERSION: ${{ steps.task_dailyreset_package_getversion.outputs.PACKAGE_VERSION }}"
+
+            # #
+            #   [ Daily Reset ] Node Setup
+            # #
+
+            - name: "⚙️ Setup › Node"
+              id: task_cloudflare_node_setup
+              uses: actions/setup-node@v4
+              with:
+                  node-version: '20.x'
+                  registry-url: https://npm.pkg.github.com/
+                  scope: '@aetherinox'
+
+            # #
+            #   [ Daily Reset ] Node - Install
+            # #
+
+            - name: "📦 NPM › Install"
+              id: task_cloudflare_npm_install
+              run: |
+                  npm install
+              env:
+                  NODE_AUTH_TOKEN: ${{ secrets.SELF_TOKEN_CL }}
+
+            # #
+            #   [ Daily Reset ] Run Pretty + Linter
+            # #
+
+            - name: "🪪 NPM › Pretty"
+              id: task_cloudflare_npm_prettylint
+              run: |
+                  npm run pretty
+
+            # #
+            #   [ Daily Reset ] Print Version
+            # #
+
+            - name: "☁️ Cloudflare › Version"
+              id: task_cloudflare_version
+              run: |
+                  echo "VERSION: ${{ env.PACKAGE_VERSION }}"
+
+            # #
+            #   [ Daily Reset ] Cloudflare Wrangler Actions - Deploy
+            # #
+
+            - name: "☁️ Cloudflare › Deploy"
+              id: task_cloudflare_deploy
+              uses: cloudflare/wrangler-action@v3
+              with:
+                  apiToken: ${{ secrets.CF_TOKEN }}
+                  accountId: ${{ secrets.CF_ACCOUNT_ID }}
+                  workingDirectory: "src"
+                  environment: 'production'
+                  command: deploy --minify
+
+    # #
+    #   [ Job ] - Complete
+    # #
+
+    job-complete:
+        name: >-
+          🆗 Successful Deployment
+        needs: job-dailyreset
+        env:
+            PACKAGE_VERSION: ${{ needs.job-dailyreset.outputs.package_version }}
+        runs-on: ubuntu-latest
+        environment:
+            name: Orion
+        steps:
+
+            # #
+            #   [ Complete ] Get Timestamp
+            # #
+
+            - name: "🕛 Get Timestamp"
+              id: task_timestamp_get
+              run: |
+                  echo "NOW=$(date +'%m-%d-%Y %H:%M:%S')" >> $GITHUB_ENV
+
+            # #
+            #   [ Complete ] Deployment Summary
+            # #
+
+            - name: "🆗 Deployment Successful: v${{ env.PACKAGE_VERSION }} @ ${{ env.NOW }}"
+              id: task_cloudflare_version
+              run: |
+                  echo "Successfully deployed worker for nightly reset: v${{ env.PACKAGE_VERSION }} @ ${{ env.NOW }}"

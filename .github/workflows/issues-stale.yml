@@ -141,7 +141,9 @@ jobs:
     job-labels-create:
         name: >-
             🎫 Labels › Verify Existing
-        runs-on: ubuntu-latest
+      # runs-on: ubuntu-latest
+        runs-on: apollo-x64
+        timeout-minutes: 4
         steps:
 
             # #
@@ -216,7 +218,9 @@ jobs:
     job-issues-nolabel:
         name: >-
             🎫 Labels › Assign Missing
-        runs-on: ubuntu-latest
+      # runs-on: ubuntu-latest
+        runs-on: apollo-x64
+        timeout-minutes: 4
         needs: job-labels-create
         steps:
 
@@ -583,7 +587,9 @@ jobs:
     job-issues-stale:
         name: >-
             💤 Check › Stale
-        runs-on: ubuntu-latest
+      # runs-on: ubuntu-latest
+        runs-on: apollo-x64
+        timeout-minutes: 4
         needs:
             - job-labels-create
             - job-issues-nolabel
@@ -603,8 +609,7 @@ jobs:
             with:
                 repo-token: ${{ secrets.ADMINSERV_TOKEN_CL }}
                 stale-issue-message: |
-                    ⚠️ It looks like there hasn't been any recent updates on this issue.  If you created this issue and no longer consider it
-                    open, then please login to github and close the issue.
+                    ⚠️ It looks like there hasn't been any recent updates on this issue.  If you created this issue and no longer consider it open, then please login to github and close the issue.
 
                     If there is no further activity on this issue, it will be automatically closed in the next week.
 
@@ -614,7 +619,7 @@ jobs:
                 stale-issue-label: 'Status 𐄂 Stale'
                 close-issue-label: 'Status 𐄂 Autoclosed'
                 exempt-issue-labels: 'Status 𐄂 Accepted,Status 𐄂 Review,Status 𐄂 Pending,Type ◦ Bug,Type ◦ Dependency,Type ◦ Docs,Type ◦ Feature,Type ◦ Git Action,Type ◦ Pull Request,Type ◦ Roadmap'
-                days-before-stale: 14
+                days-before-stale: 60
                 days-before-close: 7
                 days-before-pr-stale: -1
                 days-before-pr-close: -1
@@ -626,7 +631,9 @@ jobs:
     job-issues-lock:
         name: >-
             🔒 Check › Inactive
-        runs-on: ubuntu-latest
+      # runs-on: ubuntu-latest
+        runs-on: apollo-x64
+        timeout-minutes: 4
         needs:
             - job-labels-create
             - job-issues-nolabel

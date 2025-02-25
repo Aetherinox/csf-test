@@ -1,9 +1,10 @@
 # #
 #   @type               github workflow
 #   @desc               pull request autoscan
-#                         scans all of the files related to a particular pull request
-#                         if the code in the files being submitted contains code that is forbidden,
-#                         a report is generated and posted as a comment in the PR.
+#                           scans all of the files related to a particular pull request
+#                           if the code in the files being submitted contains code that is forbidden,
+#                           a report is generated and posted as a comment in the PR.
+#                       sends notifications to discord using webhooks
 #   @author             Aetherinox
 #   @url                https://github.com/Aetherinox
 # #
@@ -18,8 +19,6 @@ run-name: "🎫 Issues › Scan"
 on:
     pull_request_target:
         branches:
-            - alpine-base
-            - pr-test
             - main
 
 # #
@@ -56,7 +55,7 @@ env:
             { "name": "Status 𐄂 Accepted",            "color": "2e7539", "description": "This pull request has been accepted" },
             { "name": "Status 𐄂 Autoclosed",          "color": "3E0915", "description": "Originally stale and was autoclosed for no activity" },
             { "name": "Status 𐄂 Denied",              "color": "ba4058", "description": "Pull request has been denied" },
-            { "name": "Status 𐄂 Locked",              "color": "550F45", "description": "Automatically locked by AdminServ for a prolonged period of inactivity" },
+            { "name": "Status 𐄂 Locked",              "color": "550F45", "description": "Automatically locked by EuropaServ for a prolonged period of inactivity" },
             { "name": "Status 𐄂 Need Info",           "color": "2E3C4C", "description": "Not enough information to resolve" },
             { "name": "Status 𐄂 No Action",           "color": "030406", "description": "Closed without any action being taken" },
             { "name": "Status 𐄂 Pending",             "color": "984b12", "description": "Pending pull request" },
@@ -115,7 +114,9 @@ jobs:
     # #
 
     pr-autoscan:
-        runs-on: ubuntu-latest
+      # runs-on: ubuntu-latest
+        runs-on: apollo-x64
+        timeout-minutes: 10
         permissions:
             contents: read
             actions: read
@@ -823,18 +824,19 @@ jobs:
               with:
                   username: 'Io'
                   avatar-url: 'https://i.imgur.com/8BVDkla.jpg'
-                  webhook-url: ${{ secrets.DISCORD_WEBHOOK_CHAN_DOCKER_BASE_ALPINE_WORKFLOWS }}
-                  embed-title: "🎫 **Issues › Scan Workflow Ran**"
+                  webhook-url: ${{ secrets.DISCORD_WEBHOOK_CHAN_GITHUB_TVAPP2_WORKfLOWS }}
+                  embed-title: "⚙️ ${{ github.workflow_ref }}"
                   embed-url: "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
                   embed-thumbnail-url: 'https://cdn.pixabay.com/photo/2022/01/30/13/33/github-6980894_960_720.png'
                   embed-description: |
-                      ## 🎫 Issues › Scan  ${{ job.status == 'success' && '✅' || '❌' }}
+                      ## 🎫 ᲼Issues › Scan ᲼${{ job.status == 'success' && '✅' || '❌' }}
 
                       **${{ job.status == 'success' && '✅ Success' || '❌ Failure' }}** › Your container just ran the `Issues › Scan` workflow. Every time this workflow is ran, your list of pull requests will be scanned to determine what files have been changed. It will scan each modified file and see if the code conforms with our rules, and will then post a status report inside the pull request that is open.
 
                       The PR will be assigned tags depending on the outcome of the code scan. If issues are detected in the code, a list of each file and issue will be posted in the PR.
 
                       - Workflow: `${{ github.workflow }} (#${{github.run_number}})`
+                      - Runner: `${{ runner.name }}`
                       - Triggered By: `${{ github.actor }}`
                       - Status: `${{ job.status == 'success' && '✅ Successful' || '❌ Failed' }}`
 
@@ -873,18 +875,19 @@ jobs:
               with:
                   username: 'Io'
                   avatar-url: 'https://i.imgur.com/8BVDkla.jpg'
-                  webhook-url: ${{ secrets.DISCORD_WEBHOOK_CHAN_DOCKER_BASE_ALPINE_WORKFLOWS }}
-                  embed-title: "**Issues › Scan Workflow Ran**"
+                  webhook-url: ${{ secrets.DISCORD_WEBHOOK_CHAN_GITHUB_TVAPP2_WORKfLOWS }}
+                  embed-title: "⚙️ ${{ github.workflow_ref }}"
                   embed-url: "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
                   embed-thumbnail-url: 'https://cdn.pixabay.com/photo/2022/01/30/13/33/github-6980894_960_720.png'
                   embed-description: |
-                      ## 🎫 Issues › Scan  ${{ job.status == 'success' && '✅' || '❌' }}
+                      ## 🎫 ᲼Issues › Scan ᲼${{ job.status == 'success' && '✅' || '❌' }}
 
                       **${{ job.status == 'success' && '✅ Success' || '❌ Failure' }}** › Your container just ran the `Issues › Scan` workflow. Every time this workflow is ran, your list of pull requests will be scanned to determine what files have been changed. It will scan each modified file and see if the code conforms with our rules, and will then post a status report inside the pull request that is open.
 
                       The PR will be assigned tags depending on the outcome of the code scan. If issues are detected in the code, a list of each file and issue will be posted in the PR.
 
                       - Workflow: `${{ github.workflow }} (#${{github.run_number}})`
+                      - Runner: `${{ runner.name }}`
                       - Triggered By: `${{ github.actor }}`
                       - Status: `${{ job.status == 'success' && '✅ Successful' || '❌ Failed' }}`
 
@@ -903,7 +906,7 @@ jobs:
                       - Renamed Files: ${{ steps.task_autocheck_changed_files_get.outputs.renamed_files_count }}
                       - Copied Files: ${{ steps.task_autocheck_changed_files_get.outputs.copied_files_count }}
                       - Deleted Files: ${{ steps.task_autocheck_changed_files_get.outputs.deleted_files_count }}
-                      
+
                   embed-color: ${{ job.status == 'success' && '5763719' || '15418782' }}
                   embed-footer-text: "Completed at ${{ env.NOW }} UTC"
                   embed-timestamp: "${{ env.NOW_LONG }}"

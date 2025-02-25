@@ -113,7 +113,9 @@ jobs:
     issues-labels-remove:
         name: >-
             🎫 Labels › Remove
-        runs-on: ubuntu-latest
+      # runs-on: ubuntu-latest
+        runs-on: apollo-x64
+        timeout-minutes: 4
         permissions:
             contents: 'read'
             id-token: 'write'
@@ -233,7 +235,7 @@ jobs:
               with:
                   username: 'Io'
                   avatar-url: 'https://i.imgur.com/8BVDkla.jpg'
-                  webhook-url: ${{ secrets.DISCORD_WEBHOOK_CHAN_DOCKER_BASE_ALPINE_WORKFLOWS }}
+                  webhook-url: ${{ secrets.DISCORD_WEBHOOK_CHAN_TVAPP2_WORKFLOWS }}
                   embed-title: "⚙️ ${{ github.workflow_ref }}"
                   embed-url: "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
                   embed-thumbnail-url: 'https://i.imgur.com/zDIzE8T.jpg'
@@ -241,7 +243,7 @@ jobs:
                       ## 🎫 ᲼Labels › Clean ᲼${{ job.status == 'success' && '✅' || '❌' }}
 
                       A **successful** workflow has been ran to wipe all labels from your repository.
-                      
+
                       **${{ steps.task_label_remove_run.outputs.result }}** labels have been removed.
 
                       - Labels: `${{ steps.task_label_remove_run.outputs.result }} created`
@@ -269,7 +271,7 @@ jobs:
               with:
                   username: 'Io'
                   avatar-url: 'https://i.imgur.com/8BVDkla.jpg'
-                  webhook-url: ${{ secrets.DISCORD_WEBHOOK_CHAN_DOCKER_BASE_ALPINE_WORKFLOWS }}
+                  webhook-url: ${{ secrets.DISCORD_WEBHOOK_CHAN_TVAPP2_WORKFLOWS }}
                   embed-title: "⚙️ ${{ github.workflow_ref }}"
                   embed-url: "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
                   embed-thumbnail-url: 'https://i.imgur.com/zDIzE8T.jpg'
